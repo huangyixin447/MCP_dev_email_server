@@ -6,8 +6,8 @@ from typing import Dict, Any, Sequence
 import pymysql
 from  mcp.types import  TextContent
 from  mcp import  Tool
-from  .base_Mcp_Handles import BaseHandler
-from   ..config.dbconfig import get_config
+from  email_Server.handles.base_Mcp_Handles import BaseHandler
+from   email_Server.config.dbconfig import get_config
 
 """邮箱草稿"""
 
@@ -15,7 +15,7 @@ class CreateEmailHandles(BaseHandler):
     #工具名称
     name = "create_email"
     # 提示词
-    tool_Prompt = "创建邮件草稿"
+    tool_Prompt = "创建邮件草稿,并且存储到mysql5的数据库中"
 
     config: Dict[str, str]={}
 
@@ -24,11 +24,13 @@ class CreateEmailHandles(BaseHandler):
         return  self.config
 # 获取数据库连接
     def connect_db(self):
+        if not self.config:
+            self.get_config()  # 确保先加载配置
         host=self.config["DB_HOST"]
-        port=self.config["DB_PORT"]
+        port=int(self.config["DB_PORT"])
         user=self.config["DB_USER"]
         password=self.config["DB_PASSWORD"]
-        database=self.config["DB_NAME"]
+        database=self.config["DB_DATABASE"]
         charset=self.config["DB_CHARSET"]
 
         DB_CONFIG={
@@ -61,7 +63,7 @@ class CreateEmailHandles(BaseHandler):
         ))
         conn.commit()
         conn.close()
-        return [TextContent(type="text", text=f"✅ 创建成功 ID: {mail_id}")]
+        return [TextContent(type="text", text=f" 创建成功 ID: {mail_id}")]
     def get_tool_description(self) -> Tool:
         return Tool(
             name=self.name,

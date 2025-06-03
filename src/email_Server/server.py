@@ -3,11 +3,20 @@ import uvicorn
 from mcp.server import Server
 from mcp.server.sse import SseServerTransport
 from mcp.types import Prompt, Tool
-from mysql_mcp_server_pro.handles.base import ToolRegistry
+from email_Server.handles.base_Mcp_Handles import Tool_Registry
 from starlette.applications import Starlette
+from starlette.responses import StreamingResponse
 from starlette.routing import Route, Mount
 
 from prompts.base_Prompt import *
+from email_Server.handles import (
+    CreateEmailHandles,
+    DeleteEmailHandler,
+    GetLocalDraftEmailDetailHandler,
+    ListEmailHandler,
+    SendEmailHandler,
+    UpdateEmailHandler
+)
 
 
 # 初始化MCP的服务器
@@ -31,13 +40,13 @@ async  def handle_get_prompt(name: str, arguments: Dict[str, Any] | None) -> Get
 @app.list_tools()
 async def list_tools()-> list[Tool]:
 
-    return ToolRegistry.get_all_tools()
+    return Tool_Registry.get_all_tools()
 
 
 #调用指定工具的接口
 @app.call_tool()
 async  def call_tool(name:str ,arguments:Dict[str,Any])-> Sequence[TextContent]:
-    tool=ToolRegistry.get_tool(name)
+    tool=Tool_Registry.get_tool(name)
     return await tool.run_tool(arguments)
 
 # 用于运行stdio的服务器
@@ -74,6 +83,7 @@ def run_sse():
                 request.scope, request.receive, request._send
         ) as streams:
             await app.run(streams[0], streams[1], app.create_initialization_options())
+            return StreamingResponse(content=iter([]))
 
     starlette_app = Starlette(
         debug=True,
@@ -82,18 +92,13 @@ def run_sse():
             Mount("/messages/", app=sse.handle_post_message)
         ],
     )
-    uvicorn.run(starlette_app, host="0.0.0.0", port=9000)
+    print("✅ 启动中，已注册工具：", Tool_Registry.get_all_tools())  #
+    uvicorn.run(starlette_app, host="0.0.0.0", port=8080)
 
 
 def main(mode="sse"):
     """
-    主入口函数，用于命令行启动
-    支持两种模式：
-    1. SSE 模式（默认）：mysql-mcp-server
-    2. stdio 模式：mysql-mcp-server --stdio
 
-    Args:
-        mode (str): 运行模式，可选值为 "sse" 或 "stdio"
     """
     import sys
 
@@ -110,6 +115,8 @@ def main(mode="sse"):
             asyncio.run(run_stdio())
         else:
             run_sse()
+
+
 
 
 
