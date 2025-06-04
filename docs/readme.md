@@ -61,7 +61,7 @@ sse_run
 
 配置到你的mcpclient中即可
 
-使用
+使用终端输入
 
 ```
 stdio_run
@@ -73,7 +73,7 @@ stdio_run
 
 
 
-```
+```json
 {
   "mcpServers": {
       "email_server": {
@@ -86,15 +86,7 @@ stdio_run
           "run",
           "server.py",
           "--stdio"
-        ],
-        "env": {
-          "MYSQL_HOST": "192.168.xxx.xxx",
-          "MYSQL_PORT": "3306",
-          "MYSQL_USER": "root",
-          "MYSQL_PASSWORD": "root",
-          "MYSQL_DATABASE": "a_llm",
-          "MYSQL_ROLE": "admin"
-       }
+        ]
     }
   }
 }    
