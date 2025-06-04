@@ -61,7 +61,7 @@ class ListEmailHandler(BaseHandler):
         conn.close()
 
         if not rows:
-            return [TextContent(type="text", text="📭 没有符合条件的邮件记录")]
+            return [TextContent(type="text", text=" 没有符合条件的邮件记录")]
 
         # 格式化输出
         result = "\n\n".join(

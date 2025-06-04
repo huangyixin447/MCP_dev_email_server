@@ -51,7 +51,7 @@ class GetLocalDraftEmailDetailHandler(BaseHandler):
         conn.close()
 
         if not row:
-            return [TextContent(type="text", text="❌ 未找到该草稿邮件")]
+            return [TextContent(type="text", text=" 未找到该草稿邮件")]
 
         to, subject, body, attachments, status, created_at = row
         status_map = {"draft": "草稿", "sent": "已发送", "failed": "发送失败"}

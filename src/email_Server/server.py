@@ -92,7 +92,7 @@ def run_sse():
             Mount("/messages/", app=sse.handle_post_message)
         ],
     )
-    print("✅ 启动中，已注册工具：", Tool_Registry.get_all_tools())  #
+    print(" 启动中，已注册工具：", Tool_Registry.get_all_tools())  #
     uvicorn.run(starlette_app, host="0.0.0.0", port=8080)
 
 

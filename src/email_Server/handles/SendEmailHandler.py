@@ -72,7 +72,7 @@ class SendEmailHandler(BaseHandler):
 
         if not row:
             conn.close()
-            return [TextContent(type="text", text="❌ 未找到草稿或状态不正确")]
+            return [TextContent(type="text", text=" 未找到草稿或状态不正确")]
 
         # 解析字段
         to, subject, body, attachments_json = row
