@@ -6,7 +6,9 @@ from mcp import Tool
 from email_Server.handles.base_Mcp_Handles import BaseHandler
 from email_Server.config.dbconfig import get_config
 import pymysql
-
+"""
+测试成功
+"""
 
 class UpdateEmailHandler(BaseHandler):
     name = "update_email"

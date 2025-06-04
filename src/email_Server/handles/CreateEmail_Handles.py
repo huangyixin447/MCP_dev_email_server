@@ -9,7 +9,9 @@ from  mcp import  Tool
 from  email_Server.handles.base_Mcp_Handles import BaseHandler
 from   email_Server.config.dbconfig import get_config
 
-"""邮箱草稿"""
+"""邮箱草稿
+已测试
+"""
 
 class CreateEmailHandles(BaseHandler):
     #工具名称
