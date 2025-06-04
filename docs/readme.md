@@ -91,3 +91,6 @@ stdio_run
   }
 }    
 ```
+
+此项目基于原先的mcp规范开发，地址
+https://github.com/huangyixin447/MCP_dev_Test01
