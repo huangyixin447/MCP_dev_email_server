@@ -65,6 +65,7 @@ class QueryQQEmailBySubjectHandler(BaseHandler):
             return [TextContent(type="text", text=" 无法检索邮件")]
 
         email_ids = data[0].split()
+
         recent_ids = email_ids[:50]  # 只查询前 100 封邮件
 
         results = []

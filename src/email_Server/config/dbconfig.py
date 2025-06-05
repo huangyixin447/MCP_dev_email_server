@@ -29,6 +29,8 @@ def get_db_config():
     config["DB_DATABASE"] = os.getenv("DB_DATABASE")
     config["DB_CHARSET"] = os.getenv("DB_CHARSET")
     config["IMAP_HOST"] = os.getenv("IMAP_HOST")
+    config["EMAIL_MAX"]=os.getenv("EMAIL_MAX")
+
 
     required_keys = ["SMTP_HOST", "SMTP_PORT", "EMAIL_USER", "EMAIL_PASSWORD", "DB_HOST","DB_USER","DB_PASSWORD","DB_DATABASE","DB_CHARSET","DB_PORT"]
     for key in required_keys:
