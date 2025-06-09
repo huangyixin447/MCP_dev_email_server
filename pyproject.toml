@@ -21,8 +21,8 @@ build-backend = "hatchling.build"
 packages = ["src/email_Server"]
 
 [project.scripts]
-sse_run = " email_Server.client:sse_run"
-stdio_run = " email_Server.client:stdio_run"
+sse_run = "email_Server.client:sse_run"
+stdio_run = "email_Server.client:stdio_run"
 
 [[project.authors]]
 name = "timelocked"
