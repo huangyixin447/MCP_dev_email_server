@@ -1,4 +1,4 @@
-from mysql_mcp_server_pro.server import main
+from email_Server.server import main
 
 def stdio_run():
     """stdio 模式入口点"""
