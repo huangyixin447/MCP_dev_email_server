@@ -8,7 +8,7 @@ from starlette.applications import Starlette
 from starlette.responses import StreamingResponse
 from starlette.routing import Route, Mount
 
-from prompts.base_Prompt import *
+from email_Server.prompts.base_Prompt import *
 from email_Server.handles import (
     CreateEmailHandles,
     DeleteEmailHandler,
